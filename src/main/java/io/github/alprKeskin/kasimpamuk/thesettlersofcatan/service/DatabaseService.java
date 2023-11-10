@@ -36,4 +36,12 @@ public class DatabaseService {
         return false;
     }
 
+    public boolean addUser(User user) {
+        if (userRepository.existsUserByEmail(user.getEmail())) {
+            return false;
+        }
+        userRepository.save(user);
+        return true;
+    }
+
 }

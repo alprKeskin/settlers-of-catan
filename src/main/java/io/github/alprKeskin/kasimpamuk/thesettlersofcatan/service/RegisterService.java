@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class RegisterService {
 
     public boolean registerUser(RegistrationInformation registrationInformation) {
+        // code...
         return true;
     }
 
