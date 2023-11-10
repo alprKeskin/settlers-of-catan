@@ -1,7 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.rest;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.User;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.repository.UserRepository;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.RegistrationInformation;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +14,18 @@ import java.util.List;
 public class CatanController {
 
     @Autowired
-    private UserRepository userRepository;
+    private RegisterService registerService;
 
     @GetMapping("server-control")
     public ResponseEntity<String> serverControl() {
         return ResponseEntity.ok("The server is up!");
+    }
+
+    @PostMapping("register")
+    public ResponseEntity<String> register(@RequestBody RegistrationInformation registrationInformation) {
+        boolean isRegistrationSuccessful = registerService.registerUser(registrationInformation);
+        if (isRegistrationSuccessful) return ResponseEntity.ok("Registration is successful.");
+        return ResponseEntity.ok("Registration is not successful.");
     }
 
 }
