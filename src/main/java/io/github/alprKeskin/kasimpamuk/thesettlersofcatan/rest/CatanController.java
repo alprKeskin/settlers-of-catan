@@ -2,9 +2,9 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.rest;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.RegistrationInformation;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.User;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.DatabaseService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.LeaderboardService;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.RegisterService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.UserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class CatanController {
     private LeaderboardService leaderboardService;
 
     @Autowired
-    private DatabaseService databaseService; // Will be removed
+    private UserManagerService userManagerService;
 
     @GetMapping("/server-control")
     public ResponseEntity<String> serverControl() {
@@ -35,11 +35,6 @@ public class CatanController {
         boolean isRegistrationSuccessful = registerService.registerUser(registrationInformation);
         if (isRegistrationSuccessful) return ResponseEntity.ok("Registration is successful.");
         return ResponseEntity.ok("Registration is not successful.");
-    }
-
-    @GetMapping("/secured")
-    public ResponseEntity<String> secured() {
-        return ResponseEntity.ok("Hello from secured!");
     }
 
     @GetMapping("/weekly-leaderboard")
@@ -58,7 +53,16 @@ public class CatanController {
     }
 
     @PostMapping("add-user")
-    public ResponseEntity<Boolean> addUser(@RequestBody User user) {
-        return ResponseEntity.ok(databaseService.addUser(user));
+    public boolean addUser(@RequestBody User user) {
+        return userManagerService.addUser(user);
+    }
+
+    @PostMapping("add-users")
+    public ResponseEntity<String> addUsers(@RequestBody List<User> userList) {
+        List<User> unsuccessfulUserAdditions = userManagerService.addUsers(userList);
+        if (unsuccessfulUserAdditions.isEmpty()) {
+            return ResponseEntity.ok("Users are added successfully.");
+        }
+        return ResponseEntity.ok("Following users could not be added: " + unsuccessfulUserAdditions.toString());
     }
 }
