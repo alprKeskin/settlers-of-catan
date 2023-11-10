@@ -31,10 +31,8 @@ public class CatanController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegistrationInformation registrationInformation) {
-        boolean isRegistrationSuccessful = registerService.registerUser(registrationInformation);
-        if (isRegistrationSuccessful) return ResponseEntity.ok("Registration is successful.");
-        return ResponseEntity.ok("Registration is not successful.");
+    public boolean register(@RequestBody RegistrationInformation registrationInformation) {
+        return registerService.registerUser(registrationInformation);
     }
 
     @GetMapping("/weekly-leaderboard")
@@ -64,5 +62,10 @@ public class CatanController {
             return ResponseEntity.ok("Users are added successfully.");
         }
         return ResponseEntity.ok("Following users could not be added: " + unsuccessfulUserAdditions.toString());
+    }
+
+    @PostMapping("delete-user")
+    public boolean deleteUser(@RequestBody String email) {
+        return userManagerService.deleteUser(email);
     }
 }

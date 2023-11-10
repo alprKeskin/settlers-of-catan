@@ -28,12 +28,24 @@ public class DatabaseService {
         return userRepository.existsById(id);
     }
 
+    public boolean doesUserExist(String email) {
+        return userRepository.existsUserByEmail(email);
+    }
+
     public boolean deleteUser(Long id) {
-        if (doesUserExist(id)) {
-            userRepository.deleteById(id);
-            return true;
+        if (!doesUserExist(id)) {
+            return false;
         }
-        return false;
+        userRepository.deleteById(id);
+        return true;
+    }
+
+    public boolean deleteUser(String email) {
+        if (!doesUserExist(email)) {
+            return false;
+        }
+        userRepository.deleteByEmail(email);
+        return true;
     }
 
     public boolean addUser(User user) {

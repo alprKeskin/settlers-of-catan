@@ -38,4 +38,8 @@ public class UserManagerService {
         }
         return unsuccessfulAdditions;
     }
+
+    public boolean deleteUser(String email) {
+        return databaseService.deleteUser(email);
+    }
 }
