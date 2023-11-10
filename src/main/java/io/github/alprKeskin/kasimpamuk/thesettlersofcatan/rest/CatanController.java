@@ -28,4 +28,8 @@ public class CatanController {
         return ResponseEntity.ok("Registration is not successful.");
     }
 
+    @GetMapping("/secured")
+    public ResponseEntity<String> secured() {
+        return ResponseEntity.ok("Hello from secured!");
+    }
 }
