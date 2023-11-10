@@ -1,2 +1,16 @@
 server:
   port: 8080
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 8dc33655b0c65feef737
+            client-secret: a342159ea10e071e6ca58c25751cb2b433154fc2
+
+
+logging:
+  level:
+    org.springframework.security: TRACE

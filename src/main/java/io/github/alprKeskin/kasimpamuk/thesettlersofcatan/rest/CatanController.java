@@ -14,4 +14,8 @@ public class CatanController {
         return ResponseEntity.ok("The server is up!");
     }
 
+    @GetMapping("/secured")
+    public ResponseEntity<String> secured() {
+        return ResponseEntity.ok("Hello from secured!");
+    }
 }
