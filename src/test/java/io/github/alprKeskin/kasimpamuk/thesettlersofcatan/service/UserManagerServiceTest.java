@@ -73,7 +73,7 @@ class UserManagerServiceTest {
             when(databaseService.addUser(userList.get(notDuplicatedUserIndexList.get(i)))).thenReturn(true);
         }
 
-        List<User> unsuccessfulAdditions = userManagerService.addUsers(userList);
+        List<User> unsuccessfulAdditions = userManagerService.addMultipleUsers(userList);
 
         assertTrue(unsuccessfulAdditions.isEmpty());
     }
@@ -94,7 +94,7 @@ class UserManagerServiceTest {
             when(databaseService.addUser(userList.get(notDuplicatedUserIndexList.get(i)))).thenReturn(true);
         }
 
-        List<User> unsuccessfulAdditions = userManagerService.addUsers(userList);
+        List<User> unsuccessfulAdditions = userManagerService.addMultipleUsers(userList);
         assertFalse(unsuccessfulAdditions.isEmpty());
     }
 
@@ -105,7 +105,7 @@ class UserManagerServiceTest {
 
         mockDatabaseServiceDeleteUser(user.getEmail(), userList);
 
-        boolean ACTUAL = userManagerService.deleteUser(user.getEmail());
+        boolean ACTUAL = userManagerService.deleteUserByEmail(user.getEmail());
 
         assertTrue(ACTUAL);
     }
@@ -117,7 +117,7 @@ class UserManagerServiceTest {
 
         mockDatabaseServiceDeleteUser(user.getEmail(), userList);
 
-        boolean ACTUAL = userManagerService.deleteUser(user.getEmail());
+        boolean ACTUAL = userManagerService.deleteUserByEmail(user.getEmail());
 
         assertFalse(ACTUAL);
     }
@@ -188,10 +188,10 @@ class UserManagerServiceTest {
         boolean doesEmailExistInUsers = doesEmailExistInUsers(usersInTheDatabase, emailOfTheUserToBeDeleted);
 
         if (doesEmailExistInUsers) {
-            when(databaseService.deleteUser(emailOfTheUserToBeDeleted)).thenReturn(true);
+            when(databaseService.deleteUserByEmail(emailOfTheUserToBeDeleted)).thenReturn(true);
         }
         else {
-            when(databaseService.deleteUser(emailOfTheUserToBeDeleted)).thenReturn(false);
+            when(databaseService.deleteUserByEmail(emailOfTheUserToBeDeleted)).thenReturn(false);
         }
     }
 

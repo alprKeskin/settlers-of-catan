@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -15,21 +16,20 @@ public class UserManagerService {
     @Autowired
     private DatabaseService databaseService;
 
-    /***
-     * Adds the user.
-     * @param user: User to be added to the database.
-     * @return: True if addition is successful, otherwise false.
-     */
+    public User getUserByEmail(String email) {
+        Optional<User> optionalUser = databaseService.getUserByEmail(email);
+        return optionalUser.orElse(null);
+    }
+
+    public List<User> getAllUsers() {
+        return databaseService.getAllUsers();
+    }
+
     public boolean addUser(User user) {
         return databaseService.addUser(user);
     }
 
-    /***
-     * Adds a list of users.
-     * @param userList: List of users to be added.
-     * @return: List of users that cannot be added to the database.
-     */
-    public List<User> addUsers(List<User> userList) {
+    public List<User> addMultipleUsers(List<User> userList) {
         List<User> unsuccessfulAdditions = new ArrayList<>();
         for (int i = 0; i < userList.size(); i++) {
             if (!databaseService.addUser(userList.get(i))) {
@@ -39,7 +39,7 @@ public class UserManagerService {
         return unsuccessfulAdditions;
     }
 
-    public boolean deleteUser(String email) {
-        return databaseService.deleteUser(email);
+    public boolean deleteUserByEmail(String email) {
+        return databaseService.deleteUserByEmail(email);
     }
 }
