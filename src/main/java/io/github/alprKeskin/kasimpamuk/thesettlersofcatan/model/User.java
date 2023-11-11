@@ -12,11 +12,16 @@ import lombok.*;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Column
     private Integer highestWeekScore;
+    @Column
     private Integer highestMonthScore;
+    @Column
     private Integer highestAllTimeScore;
 }
