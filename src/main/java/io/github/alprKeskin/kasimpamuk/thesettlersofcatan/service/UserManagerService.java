@@ -31,7 +31,7 @@ public class UserManagerService {
 
     public boolean addUser(User user) {
         if (isProperEMail(user.getEmail())) return databaseService.addUser(user);
-        throw new RuntimeException("Email of the user to be added is not proper\nGiven: " + user.getEmail() + "\nAcceptable email suffixes: @outlook.com, @metu.edu.tr, @ceng.metu.edu.tr");
+        throw new RuntimeException("Email of the user to be added is not proper\nGiven: " + user.getEmail() + "\nAcceptable email suffixes: @outlook.com");
     }
 
     public List<User> addMultipleUsers(List<User> userList) {
@@ -51,8 +51,6 @@ public class UserManagerService {
     private boolean isProperEMail(String email) {
         List<String> acceptableEmailSuffixes = new ArrayList<>();
         acceptableEmailSuffixes.add("@outlook.com");
-        acceptableEmailSuffixes.add("@metu.edu.tr");
-        acceptableEmailSuffixes.add("@ceng.metu.edu.tr");
 
         for (int i = 0; i < acceptableEmailSuffixes.size(); i++) {
             if (email.endsWith(acceptableEmailSuffixes.get(i))) {

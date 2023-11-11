@@ -14,11 +14,21 @@ public class DatabaseController {
     @Autowired
     private UserManagerService userManagerService;
 
+    /***
+     * Gets the user with the given email.
+     * If no user with the given email exists in the database, returns null
+     * @param email: Email of the user
+     * @return: user with the given email
+     */
     @PostMapping("/get-user")
     public User getUser(@RequestBody String email) {
         return userManagerService.getUserByEmail(email);
     }
 
+    /***
+     * Gets all users in the database
+     * @return: List of users in the database
+     */
     @GetMapping("/get-all-users")
     public List<User> getAllUsers() {
         return userManagerService.getAllUsers();
@@ -28,6 +38,7 @@ public class DatabaseController {
      * Adds a user
      * @param user: User to be added.
      * @return: Success of the addition.
+     * @exception: Not proper email. Email should end with @outlook.com
      */
     @PostMapping("add-user")
     public boolean addUser(@RequestBody User user) {
