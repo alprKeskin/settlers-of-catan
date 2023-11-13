@@ -11,15 +11,12 @@ import java.util.Optional;
 @Service
 public class AuthenticationService {
 
-    private final DatabaseService databaseService;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private DatabaseService databaseService;
 
     @Autowired
-    public AuthenticationService(DatabaseService databaseService, PasswordEncoder passwordEncoder) {
-        this.databaseService = databaseService;
-        this.passwordEncoder = passwordEncoder;
-    }
-
+    private PasswordEncoder passwordEncoder;
+    
     public void registerUser(RegistrationInformation registrationInformation) {
         User user = new User(
                 registrationInformation.getEmail(),
