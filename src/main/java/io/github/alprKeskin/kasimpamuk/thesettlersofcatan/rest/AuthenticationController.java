@@ -14,6 +14,11 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    @GetMapping("hello")
+    public String hello() {
+        return "hello";
+    }
+
     @PostMapping("/register")
     public void registerUser(@RequestBody RegistrationInformation registrationInformation) {
         authenticationService.registerUser(registrationInformation);
