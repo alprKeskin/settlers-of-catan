@@ -24,4 +24,13 @@ public class User {
     private Integer highestMonthScore;
     @Column
     private Integer highestAllTimeScore;
+
+    public User (String email, String password, Integer highestWeekScore, Integer highestMonthScore, Integer highestAllTimeScore) {
+        this.email = email;
+        this.password = password;
+        this.highestWeekScore = highestWeekScore;
+        this.highestMonthScore = highestMonthScore;
+        this.highestAllTimeScore = highestAllTimeScore;
+    }
+
 }
