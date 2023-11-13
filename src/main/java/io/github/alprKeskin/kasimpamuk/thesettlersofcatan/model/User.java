@@ -1,37 +1,27 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
-
-import jakarta.persistence.Id;
-
+@Data
 @Entity
+@Table(name="Users")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    @Column(nullable = false, unique = true)
+    private String email;
+    @Column(nullable = false)
     private String password;
-
-    // getters and setters
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getUserName() {
-        return username;
-    }
-    public void setUserName(String userName) {
-        this.username = userName;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    @Column
+    private Integer highestWeekScore;
+    @Column
+    private Integer highestMonthScore;
+    @Column
+    private Integer highestAllTimeScore;
 }
