@@ -5,7 +5,7 @@ import lombok.*;
 
 @Data
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,16 +13,17 @@ import lombok.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
-    @Column
+    @Column(name = "highest_week_score")
     private Integer highestWeekScore;
-    @Column
+    @Column(name = "highest_month_score")
     private Integer highestMonthScore;
-    @Column
+    @Column(name = "highest_all_time_score")
     private Integer highestAllTimeScore;
 
     public User (String email, String password, Integer highestWeekScore, Integer highestMonthScore, Integer highestAllTimeScore) {

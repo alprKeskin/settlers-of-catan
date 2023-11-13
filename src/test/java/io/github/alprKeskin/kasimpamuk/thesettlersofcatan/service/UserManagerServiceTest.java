@@ -34,7 +34,7 @@ class UserManagerServiceTest {
     @Test
     void givenUserWithUniqueEmail_whenAddUser_thenReturnTrue() {
         List<User> userList = createCorrectUserList();
-        User user = new User(147L, "unique_email@outlook.com", "1234", 50, 60, 70);
+        User user = new User(147, "unique_email@outlook.com", "1234", 50, 60, 70);
 
         // set behavior of the databaseService.addUser method
         mockDatabaseServiceAddUser(user, userList);
@@ -47,7 +47,7 @@ class UserManagerServiceTest {
     @Test
     void givenUserWithExistingEmailInDatabase_whenAddUser_thenReturnFalse() {
         List<User> userList = createCorrectUserList();
-        User user = new User(149L, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000);
+        User user = new User(149, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000);
 
         // set behavior of the databaseService.addUser method
         mockDatabaseServiceAddUser(user, userList);
@@ -101,7 +101,7 @@ class UserManagerServiceTest {
     @Test
     void givenExistingUser_whenDeleteUser_thenReturnTrue() {
         List<User> userList = createCorrectUserList();
-        User user = new User(150L, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000);
+        User user = new User(150, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000);
 
         mockDatabaseServiceDeleteUser(user.getEmail(), userList);
 
@@ -113,7 +113,7 @@ class UserManagerServiceTest {
     @Test
     void givenNotExistingUser_whenDeleteUser_thenReturnFalse() {
         List<User> userList = createCorrectUserList();
-        User user = new User(151L, "unique_email@outlook.com", "1234", 1000, 1000, 1000);
+        User user = new User(151, "unique_email@outlook.com", "1234", 1000, 1000, 1000);
 
         mockDatabaseServiceDeleteUser(user.getEmail(), userList);
 
@@ -126,12 +126,12 @@ class UserManagerServiceTest {
     private List<User> createCorrectUserList() {
         List<User> userList = new ArrayList<>();
 
-        userList.add(new User(3L, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
-        userList.add(new User(1L, "alper_keskin@outlook.com", "123", 30, 20, 50));
-        userList.add(new User(2L, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
-        userList.add(new User(4L, "johny_bravo@outlook.com", "123", 8, 5, 3));
-        userList.add(new User(5L, "sinan_engin@outlook.com", "123", 0, 0, 0));
-        userList.add(new User(6L, "elon_musk@outlook.com", "X", 999, 999, 999));
+        userList.add(new User(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
+        userList.add(new User(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
+        userList.add(new User(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
+        userList.add(new User(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
+        userList.add(new User(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
+        userList.add(new User(6, "elon_musk@outlook.com", "X", 999, 999, 999));
 
         return userList;
     }
@@ -139,8 +139,8 @@ class UserManagerServiceTest {
     private List<User> createErrorUserListDueToDuplicatedId() {
         List<User> userList = new ArrayList<>();
 
-        userList.add(new User(3L, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
-        userList.add(new User(3L, "alper_keskin@outlook.com", "123", 30, 20, 50));
+        userList.add(new User(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
+        userList.add(new User(3, "alper_keskin@outlook.com", "123", 30, 20, 50));
 
         return userList;
     }
@@ -153,7 +153,7 @@ class UserManagerServiceTest {
 
         // find the indexes of users having duplicated id
         for (int i = 1; i < userList.size(); i++) {
-            Long currentUserId = userList.get(i).getId();
+            Integer currentUserId = userList.get(i).getId();
             for (int j = i - 1; j < i; j++) {
                 // if it is duplicated
                 if (Objects.equals(currentUserId, userList.get(j).getId())) {

@@ -23,7 +23,8 @@ public class AuthenticationService {
     public void registerUser(RegistrationInformation registrationInformation) {
         User user = new User(
                 registrationInformation.getEmail(),
-                passwordEncoder.encode(registrationInformation.getPassword()),
+                registrationInformation.getPassword(),
+//                passwordEncoder.encode(registrationInformation.getPassword()),
                 0,
                 0,
                 0
