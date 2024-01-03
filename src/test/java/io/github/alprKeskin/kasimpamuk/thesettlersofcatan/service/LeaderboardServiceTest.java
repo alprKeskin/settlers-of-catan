@@ -89,12 +89,12 @@ class LeaderboardServiceTest {
         when(databaseService.getAllUsers()).thenReturn(catanUsers);
 
         List<CatanUser> EXPECTED = new ArrayList<>();
-        EXPECTED.add(new CatanUser(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
-        EXPECTED.add(new CatanUser(6, "elon_musk@outlook.com", "X", 999, 999, 999));
-        EXPECTED.add(new CatanUser(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
-        EXPECTED.add(new CatanUser(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
-        EXPECTED.add(new CatanUser(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
-        EXPECTED.add(new CatanUser(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
+        EXPECTED.add(new CatanUser(3L, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
+        EXPECTED.add(new CatanUser(6L, "elon_musk@outlook.com", "X", 999, 999, 999));
+        EXPECTED.add(new CatanUser(1L, "alper_keskin@outlook.com", "123", 30, 20, 50));
+        EXPECTED.add(new CatanUser(2L, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
+        EXPECTED.add(new CatanUser(4L, "johny_bravo@outlook.com", "123", 8, 5, 3));
+        EXPECTED.add(new CatanUser(5L, "sinan_engin@outlook.com", "123", 0, 0, 0));
 
         List<CatanUser> ACTUAL = leaderboardService.getLeaderboardOfTheMonth();
 
@@ -139,9 +139,9 @@ class LeaderboardServiceTest {
     private List<CatanUser> createSmallMockUsers() {
         List<CatanUser> catanUsers = new ArrayList<>();
 
-        catanUsers.add(new CatanUser(1, "alper@outlook.com", "123", 30, 20, 50));
-        catanUsers.add(new CatanUser(2, "kasim@outlook.com", "123", 100, 10, 20));
-        catanUsers.add(new CatanUser(3, "john@outlook.com", "123", 20, 50, 5));
+        catanUsers.add(new CatanUser(1L, "alper@outlook.com", "123", 30, 20, 50));
+        catanUsers.add(new CatanUser(2L, "kasim@outlook.com", "123", 100, 10, 20));
+        catanUsers.add(new CatanUser(3L, "john@outlook.com", "123", 20, 50, 5));
 
         return catanUsers;
     }

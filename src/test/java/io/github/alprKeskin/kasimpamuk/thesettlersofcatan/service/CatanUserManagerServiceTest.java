@@ -11,7 +11,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class CatanUserManagerServiceTest {
@@ -66,12 +65,12 @@ class CatanUserManagerServiceTest {
         List<Integer> notDuplicatedUserIndexList = map.get("notDuplicatedUserIndexList");
 
         // set rules for the mock
-        for (int i = 0; i < duplicatedUserIndexList.size(); i++) {
-            when(databaseService.addUser(catanUserList.get(duplicatedUserIndexList.get(i)))).thenReturn(false);
-        }
-        for (int i = 0; i < notDuplicatedUserIndexList.size(); i++) {
-            when(databaseService.addUser(catanUserList.get(notDuplicatedUserIndexList.get(i)))).thenReturn(true);
-        }
+		for (Integer integer : duplicatedUserIndexList) {
+			when(databaseService.addUser(catanUserList.get(integer))).thenReturn(false);
+		}
+		for (Integer integer : notDuplicatedUserIndexList) {
+			when(databaseService.addUser(catanUserList.get(integer))).thenReturn(true);
+		}
 
         List<CatanUser> unsuccessfulAdditions = userManagerService.addMultipleUsers(catanUserList);
 
@@ -87,12 +86,12 @@ class CatanUserManagerServiceTest {
         List<Integer> notDuplicatedUserIndexList = map.get("notDuplicatedUserIndexList");
 
         // set rules for the mock
-        for (int i = 0; i < duplicatedUserIndexList.size(); i++) {
-            when(databaseService.addUser(catanUserList.get(duplicatedUserIndexList.get(i)))).thenReturn(false);
-        }
-        for (int i = 0; i < notDuplicatedUserIndexList.size(); i++) {
-            when(databaseService.addUser(catanUserList.get(notDuplicatedUserIndexList.get(i)))).thenReturn(true);
-        }
+		for (Integer integer : duplicatedUserIndexList) {
+			when(databaseService.addUser(catanUserList.get(integer))).thenReturn(false);
+		}
+		for (Integer integer : notDuplicatedUserIndexList) {
+			when(databaseService.addUser(catanUserList.get(integer))).thenReturn(true);
+		}
 
         List<CatanUser> unsuccessfulAdditions = userManagerService.addMultipleUsers(catanUserList);
         assertFalse(unsuccessfulAdditions.isEmpty());
@@ -113,7 +112,7 @@ class CatanUserManagerServiceTest {
     @Test
     void givenNotExistingUser_whenDeleteUser_thenReturnFalse() {
         List<CatanUser> catanUserList = createCorrectUserList();
-        CatanUser catanUser = new CatanUser(151, "unique_email@outlook.com", "1234", 1000, 1000, 1000);
+        CatanUser catanUser = new CatanUser(151L, "unique_email@outlook.com", "1234", 1000, 1000, 1000);
 
         mockDatabaseServiceDeleteUser(catanUser.getEmail(), catanUserList);
 
@@ -166,7 +165,7 @@ class CatanUserManagerServiceTest {
             }
         }
 
-        Map<String, List<Integer>> map = new HashMap<String, List<Integer>>();
+        Map<String, List<Integer>> map = new HashMap<>();
         map.put("duplicatedUserIndexList", duplicatedUserIndexList);
         map.put("notDuplicatedUserIndexList", notDuplicatedUserIndexList);
 
@@ -196,11 +195,11 @@ class CatanUserManagerServiceTest {
     }
 
     private boolean doesEmailExistInUsers(List<CatanUser> catanUserList, String email) {
-        for (int i = 0; i < catanUserList.size(); i++) {
-            if (email.equals(catanUserList.get(i).getEmail())) {
-                return true;
-            }
-        }
+		for (CatanUser catanUser : catanUserList) {
+			if (email.equals(catanUser.getEmail())) {
+				return true;
+			}
+		}
         return false;
     }
 
