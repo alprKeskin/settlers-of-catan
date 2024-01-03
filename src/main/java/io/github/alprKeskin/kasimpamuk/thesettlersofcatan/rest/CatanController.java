@@ -1,11 +1,17 @@
-/***
- * This controller stands for only service availability check for now.
- * It will be converted to a controller to be used in main logic.
- */
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.rest;
 
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.PlayerActionInfo;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.TileInfo;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.request.RequestDTO;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.InitialResponseDTO;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.ResponseDTO;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.Color;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.ResponseType;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.TerrainType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/catan")
@@ -20,6 +26,31 @@ public class CatanController {
     @GetMapping("/server-control")
     public ResponseEntity<String> serverControl() {
         return ResponseEntity.ok("The server is up!");
+    }
+
+    @GetMapping("/test-get")
+    public ResponseEntity<InitialResponseDTO> testGet() {
+        InitialResponseDTO initialResponseDTO = new InitialResponseDTO(
+                ResponseType.YOUR_TURN,
+                55,
+                Color.YELLOW,
+                List.of(new TileInfo(1, 10, TerrainType.HILL), new TileInfo(2, 20, TerrainType.FOREST))
+        );
+
+        return ResponseEntity.ok(initialResponseDTO);
+    }
+
+    @PostMapping("/test-post")
+    public ResponseEntity<ResponseDTO> testPost(@RequestBody RequestDTO requestDTO) {
+        System.out.println("Incoming RequestDTO: " + requestDTO.toString());
+
+        ResponseDTO responseDTO = new ResponseDTO(
+                ResponseType.WAIT,
+                new PlayerActionInfo(1, Color.RED, 5, 6, List.of(1, 2), List.of(3, 4, 5))
+        );
+
+
+        return ResponseEntity.ok(responseDTO);
     }
 
 }

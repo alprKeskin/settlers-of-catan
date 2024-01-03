@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistrationInformation {
+public class LoginInformation {
     private String email;
     private String password;
 }

@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.request;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
+public class LoginResponse {
 
     private String email;
-    private String password;
+    private String token;
 
 }

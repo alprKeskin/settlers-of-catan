@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.rest;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.User;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication.CatanUser;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.LeaderboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ public class LeaderboardController {
      * @return: List of users ordered by weekly scores.
      */
     @GetMapping("/weekly-leaderboard")
-    public List<User> getWeeklyLeaderBoard() {
+    public List<CatanUser> getWeeklyLeaderBoard() {
         return leaderboardService.getLeaderboardOfTheWeek();
     }
 
@@ -30,7 +30,7 @@ public class LeaderboardController {
      * @return: List of users ordered by monthly scores.
      */
     @GetMapping("/monthly-leaderboard")
-    public List<User> getMonthlyLeaderBoard() {
+    public List<CatanUser> getMonthlyLeaderBoard() {
         return leaderboardService.getLeaderboardOfTheMonth();
     }
 
@@ -39,7 +39,7 @@ public class LeaderboardController {
      * @return: List of users ordered by all times scores.
      */
     @GetMapping("/all-time-leaderboard")
-    public List<User> getAllTimeLeaderBoard() {
+    public List<CatanUser> getAllTimeLeaderBoard() {
         return leaderboardService.getLeaderboardOfAllTimes();
     }
 

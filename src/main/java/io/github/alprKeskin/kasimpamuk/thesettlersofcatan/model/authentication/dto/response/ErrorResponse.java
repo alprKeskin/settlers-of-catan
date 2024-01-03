@@ -1,4 +1,4 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.response;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.config;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.CustomUserDetailsService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.authentication.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

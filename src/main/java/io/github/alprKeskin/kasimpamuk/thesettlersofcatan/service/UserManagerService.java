@@ -1,9 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.User;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication.CatanUser;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,29 +13,31 @@ import java.util.Optional;
 @Slf4j
 public class UserManagerService {
 
-    private static Logger logger = LoggerFactory.getLogger(Slf4j.class);
+    private final DatabaseService databaseService;
 
     @Autowired
-    private DatabaseService databaseService;
-
-    public User getUserByEmail(String email) {
-        Optional<User> optionalUser = databaseService.getUserByEmail(email);
-        return optionalUser.orElse(null);
+    public UserManagerService(DatabaseService databaseService) {
+        this.databaseService = databaseService;
     }
 
-    public List<User> getAllUsers() {
+    public CatanUser getUserByEmail(String email) {
+        Optional<CatanUser> optionalUser = databaseService.getUserByEmail(email);
+		return optionalUser.orElse(null);
+	}
+
+    public List<CatanUser> getAllUsers() {
         return databaseService.getAllUsers();
     }
 
-    public boolean addUser(User user) {
-        return databaseService.addUser(user);
+    public boolean addUser(CatanUser catanUser) {
+        return databaseService.addUser(catanUser);
     }
 
-    public List<User> addMultipleUsers(List<User> userList) {
-        List<User> unsuccessfulAdditions = new ArrayList<>();
-        for (int i = 0; i < userList.size(); i++) {
-            if (!databaseService.addUser(userList.get(i))) {
-                unsuccessfulAdditions.add(userList.get(i));
+    public List<CatanUser> addMultipleUsers(List<CatanUser> catanUserList) {
+        List<CatanUser> unsuccessfulAdditions = new ArrayList<>();
+        for (int i = 0; i < catanUserList.size(); i++) {
+            if (!databaseService.addUser(catanUserList.get(i))) {
+                unsuccessfulAdditions.add(catanUserList.get(i));
             }
         }
         return unsuccessfulAdditions;

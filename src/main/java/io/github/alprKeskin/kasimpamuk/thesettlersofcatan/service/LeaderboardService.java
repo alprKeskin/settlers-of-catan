@@ -1,7 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.enumeration.TimeInterval;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.User;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication.CatanUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,46 +14,50 @@ import java.util.List;
 @Slf4j
 public class LeaderboardService {
 
-    @Autowired
-    private DatabaseService databaseService;
+    private final DatabaseService databaseService;
 
-    public List<User> getLeaderboardOfTheWeek() {
+    @Autowired
+    public LeaderboardService(DatabaseService databaseService) {
+        this.databaseService = databaseService;
+    }
+
+    public List<CatanUser> getLeaderboardOfTheWeek() {
         return getLeaderboard(TimeInterval.WEEK);
     }
 
-    public List<User> getLeaderboardOfTheMonth() {
+    public List<CatanUser> getLeaderboardOfTheMonth() {
         return getLeaderboard(TimeInterval.MONTH);
     }
 
-    public List<User> getLeaderboardOfAllTimes() {
+    public List<CatanUser> getLeaderboardOfAllTimes() {
         return getLeaderboard(TimeInterval.ALL_TIME);
     }
 
-    private List<User> getLeaderboard(TimeInterval timeInterval) {
+    private List<CatanUser> getLeaderboard(TimeInterval timeInterval) {
         return getUsersOrderedByScores(timeInterval);
     }
 
-    private List<User> getUsersOrderedByScores(TimeInterval timeInterval) {
-        List<User> users = databaseService.getAllUsers();
-        return sortUsersByHighestAllTimesScore(users, timeInterval);
+    private List<CatanUser> getUsersOrderedByScores(TimeInterval timeInterval) {
+        List<CatanUser> catanUsers = databaseService.getAllUsers();
+        return sortUsersByHighestAllTimesScore(catanUsers, timeInterval);
     }
 
-    private List<User> sortUsersByHighestAllTimesScore(List<User> users, TimeInterval timeInterval) {
+    private List<CatanUser> sortUsersByHighestAllTimesScore(List<CatanUser> catanUsers, TimeInterval timeInterval) {
         if (timeInterval == TimeInterval.WEEK) {
-            users.sort(Comparator.comparing(User::getHighestWeekScore));
+            catanUsers.sort(Comparator.comparing(CatanUser::getHighestWeekScore));
         }
         else if (timeInterval == TimeInterval.MONTH) {
-            users.sort(Comparator.comparing(User::getHighestMonthScore));
+            catanUsers.sort(Comparator.comparing(CatanUser::getHighestMonthScore));
         }
         else {
-            users.sort(Comparator.comparing(User::getHighestAllTimeScore));
+            catanUsers.sort(Comparator.comparing(CatanUser::getHighestAllTimeScore));
         }
-        return reverseLeaderboard(users);
+        return reverseLeaderboard(catanUsers);
     }
 
-    private List<User> reverseLeaderboard(List<User> users) {
-        Collections.reverse(users);
-        return users;
+    private List<CatanUser> reverseLeaderboard(List<CatanUser> catanUsers) {
+        Collections.reverse(catanUsers);
+        return catanUsers;
     }
 
 }

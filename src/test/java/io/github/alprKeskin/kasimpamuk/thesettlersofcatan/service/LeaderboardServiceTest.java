@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.User;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication.CatanUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,15 +34,15 @@ class LeaderboardServiceTest {
     @Test
     void givenSmallMockUsers_whenGetLeaderboardOfTheWeek_thenReturnLeaderboard() {
         // mock the data in the database
-        List<User> users = createSmallMockUsers();
-        when(databaseService.getAllUsers()).thenReturn(users);
+        List<CatanUser> catanUsers = createSmallMockUsers();
+        when(databaseService.getAllUsers()).thenReturn(catanUsers);
 
-        List<User> EXPECTED = new ArrayList<>();
-        EXPECTED.add(new User(2, "kasim@outlook.com", "123", 100, 10, 20));
-        EXPECTED.add(new User(1, "alper@outlook.com", "123", 30, 20, 50));
-        EXPECTED.add(new User(3, "john@outlook.com", "123", 20, 50, 5));
+        List<CatanUser> EXPECTED = new ArrayList<>();
+        EXPECTED.add(new CatanUser(2, "kasim@outlook.com", "123", 100, 10, 20));
+        EXPECTED.add(new CatanUser(1, "alper@outlook.com", "123", 30, 20, 50));
+        EXPECTED.add(new CatanUser(3, "john@outlook.com", "123", 20, 50, 5));
 
-        List<User> ACTUAL = leaderboardService.getLeaderboardOfTheWeek();
+        List<CatanUser> ACTUAL = leaderboardService.getLeaderboardOfTheWeek();
 
         Assertions.assertIterableEquals(EXPECTED, ACTUAL);
     }
@@ -50,18 +50,18 @@ class LeaderboardServiceTest {
     @Test
     void givenLargeMockUsers_whenGetLeaderboardOfTheWeek_thenReturnLeaderboard() {
         // mock the data in the database
-        List<User> users = createLargeMockUsers();
-        when(databaseService.getAllUsers()).thenReturn(users);
+        List<CatanUser> catanUsers = createLargeMockUsers();
+        when(databaseService.getAllUsers()).thenReturn(catanUsers);
 
-        List<User> EXPECTED = new ArrayList<>();
-        EXPECTED.add(new User(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
-        EXPECTED.add(new User(6, "elon_musk@outlook.com", "X", 999, 999, 999));
-        EXPECTED.add(new User(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
-        EXPECTED.add(new User(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
-        EXPECTED.add(new User(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
-        EXPECTED.add(new User(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
+        List<CatanUser> EXPECTED = new ArrayList<>();
+        EXPECTED.add(new CatanUser(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
+        EXPECTED.add(new CatanUser(6, "elon_musk@outlook.com", "X", 999, 999, 999));
+        EXPECTED.add(new CatanUser(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
+        EXPECTED.add(new CatanUser(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
+        EXPECTED.add(new CatanUser(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
+        EXPECTED.add(new CatanUser(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
 
-        List<User> ACTUAL = leaderboardService.getLeaderboardOfTheWeek();
+        List<CatanUser> ACTUAL = leaderboardService.getLeaderboardOfTheWeek();
 
         Assertions.assertIterableEquals(EXPECTED, ACTUAL);
     }
@@ -69,15 +69,15 @@ class LeaderboardServiceTest {
     @Test
     void givenSmallMockUsers_whenGetLeaderboardOfTheMonth_thenReturnLeaderboard() {
         // mock the data in the database
-        List<User> users = createSmallMockUsers();
-        when(databaseService.getAllUsers()).thenReturn(users);
+        List<CatanUser> catanUsers = createSmallMockUsers();
+        when(databaseService.getAllUsers()).thenReturn(catanUsers);
 
-        List<User> EXPECTED = new ArrayList<>();
-        EXPECTED.add(new User(3, "john@outlook.com", "123", 20, 50, 5));
-        EXPECTED.add(new User(1, "alper@outlook.com", "123", 30, 20, 50));
-        EXPECTED.add(new User(2, "kasim@outlook.com", "123", 100, 10, 20));
+        List<CatanUser> EXPECTED = new ArrayList<>();
+        EXPECTED.add(new CatanUser(3, "john@outlook.com", "123", 20, 50, 5));
+        EXPECTED.add(new CatanUser(1, "alper@outlook.com", "123", 30, 20, 50));
+        EXPECTED.add(new CatanUser(2, "kasim@outlook.com", "123", 100, 10, 20));
 
-        List<User> ACTUAL = leaderboardService.getLeaderboardOfTheMonth();
+        List<CatanUser> ACTUAL = leaderboardService.getLeaderboardOfTheMonth();
 
         Assertions.assertIterableEquals(EXPECTED, ACTUAL);
     }
@@ -85,18 +85,18 @@ class LeaderboardServiceTest {
     @Test
     void givenLargeMockUsers_whenGetLeaderboardOfTheMonth_thenReturnLeaderboard() {
         // mock the data in the database
-        List<User> users = createLargeMockUsers();
-        when(databaseService.getAllUsers()).thenReturn(users);
+        List<CatanUser> catanUsers = createLargeMockUsers();
+        when(databaseService.getAllUsers()).thenReturn(catanUsers);
 
-        List<User> EXPECTED = new ArrayList<>();
-        EXPECTED.add(new User(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
-        EXPECTED.add(new User(6, "elon_musk@outlook.com", "X", 999, 999, 999));
-        EXPECTED.add(new User(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
-        EXPECTED.add(new User(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
-        EXPECTED.add(new User(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
-        EXPECTED.add(new User(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
+        List<CatanUser> EXPECTED = new ArrayList<>();
+        EXPECTED.add(new CatanUser(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
+        EXPECTED.add(new CatanUser(6, "elon_musk@outlook.com", "X", 999, 999, 999));
+        EXPECTED.add(new CatanUser(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
+        EXPECTED.add(new CatanUser(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
+        EXPECTED.add(new CatanUser(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
+        EXPECTED.add(new CatanUser(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
 
-        List<User> ACTUAL = leaderboardService.getLeaderboardOfTheMonth();
+        List<CatanUser> ACTUAL = leaderboardService.getLeaderboardOfTheMonth();
 
         Assertions.assertIterableEquals(EXPECTED, ACTUAL);
     }
@@ -104,15 +104,15 @@ class LeaderboardServiceTest {
     @Test
     void givenSmallMockUsers_whenGetLeaderboardOfAllTimes_thenReturnLeaderboard() {
         // mock the data in the database
-        List<User> users = createSmallMockUsers();
-        when(databaseService.getAllUsers()).thenReturn(users);
+        List<CatanUser> catanUsers = createSmallMockUsers();
+        when(databaseService.getAllUsers()).thenReturn(catanUsers);
 
-        List<User> EXPECTED = new ArrayList<>();
-        EXPECTED.add(new User(1, "alper@outlook.com", "123", 30, 20, 50));
-        EXPECTED.add(new User(2, "kasim@outlook.com", "123", 100, 10, 20));
-        EXPECTED.add(new User(3, "john@outlook.com", "123", 20, 50, 5));
+        List<CatanUser> EXPECTED = new ArrayList<>();
+        EXPECTED.add(new CatanUser(1, "alper@outlook.com", "123", 30, 20, 50));
+        EXPECTED.add(new CatanUser(2, "kasim@outlook.com", "123", 100, 10, 20));
+        EXPECTED.add(new CatanUser(3, "john@outlook.com", "123", 20, 50, 5));
 
-        List<User> ACTUAL = leaderboardService.getLeaderboardOfAllTimes();
+        List<CatanUser> ACTUAL = leaderboardService.getLeaderboardOfAllTimes();
 
         Assertions.assertIterableEquals(EXPECTED, ACTUAL);
     }
@@ -120,43 +120,43 @@ class LeaderboardServiceTest {
     @Test
     void givenLargeMockUsers_whenGetLeaderboardOfAllTimes_thenReturnLeaderboard() {
         // mock the data in the database
-        List<User> users = createLargeMockUsers();
-        when(databaseService.getAllUsers()).thenReturn(users);
+        List<CatanUser> catanUsers = createLargeMockUsers();
+        when(databaseService.getAllUsers()).thenReturn(catanUsers);
 
-        List<User> EXPECTED = new ArrayList<>();
-        EXPECTED.add(new User(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
-        EXPECTED.add(new User(6, "elon_musk@outlook.com", "X", 999, 999, 999));
-        EXPECTED.add(new User(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
-        EXPECTED.add(new User(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
-        EXPECTED.add(new User(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
-        EXPECTED.add(new User(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
+        List<CatanUser> EXPECTED = new ArrayList<>();
+        EXPECTED.add(new CatanUser(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
+        EXPECTED.add(new CatanUser(6, "elon_musk@outlook.com", "X", 999, 999, 999));
+        EXPECTED.add(new CatanUser(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
+        EXPECTED.add(new CatanUser(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
+        EXPECTED.add(new CatanUser(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
+        EXPECTED.add(new CatanUser(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
 
-        List<User> ACTUAL = leaderboardService.getLeaderboardOfAllTimes();
+        List<CatanUser> ACTUAL = leaderboardService.getLeaderboardOfAllTimes();
 
         Assertions.assertIterableEquals(EXPECTED, ACTUAL);
     }
 
-    private List<User> createSmallMockUsers() {
-        List<User> users = new ArrayList<>();
+    private List<CatanUser> createSmallMockUsers() {
+        List<CatanUser> catanUsers = new ArrayList<>();
 
-        users.add(new User(1, "alper@outlook.com", "123", 30, 20, 50));
-        users.add(new User(2, "kasim@outlook.com", "123", 100, 10, 20));
-        users.add(new User(3, "john@outlook.com", "123", 20, 50, 5));
+        catanUsers.add(new CatanUser(1, "alper@outlook.com", "123", 30, 20, 50));
+        catanUsers.add(new CatanUser(2, "kasim@outlook.com", "123", 100, 10, 20));
+        catanUsers.add(new CatanUser(3, "john@outlook.com", "123", 20, 50, 5));
 
-        return users;
+        return catanUsers;
     }
 
-    private List<User> createLargeMockUsers() {
-        List<User> users = new ArrayList<>();
+    private List<CatanUser> createLargeMockUsers() {
+        List<CatanUser> catanUsers = new ArrayList<>();
 
-        users.add(new User(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
-        users.add(new User(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
-        users.add(new User(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
-        users.add(new User(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
-        users.add(new User(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
-        users.add(new User(6, "elon_musk@outlook.com", "X", 999, 999, 999));
+        catanUsers.add(new CatanUser(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
+        catanUsers.add(new CatanUser(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
+        catanUsers.add(new CatanUser(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
+        catanUsers.add(new CatanUser(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
+        catanUsers.add(new CatanUser(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
+        catanUsers.add(new CatanUser(6, "elon_musk@outlook.com", "X", 999, 999, 999));
 
-        return users;
+        return catanUsers;
     }
 
 }
