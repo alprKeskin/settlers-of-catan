@@ -1,7 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.authentication;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication.CatanUser;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.DatabaseService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.userdatabase.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

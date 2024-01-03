@@ -13,6 +13,7 @@ import java.util.List;
 @ToString
 public class RequestDTO {
 
+	private int gameId;
 	private int playerId;
 	private int dice1;
 	private int dice2;

@@ -17,6 +17,7 @@ import java.util.List;
 public class InitialResponseDTO {
 
 	private ResponseType responseType;
+	private int gameId;
 	private int playerId;
 	private Color playerColor;
 	private List<TileInfo> tileInfos;

@@ -28,10 +28,18 @@ public class CatanController {
         return ResponseEntity.ok("The server is up!");
     }
 
+    @GetMapping("/initial-game-data")
+    public ResponseEntity<InitialResponseDTO> initialGameData() {
+        // initialize a game session
+        // send necessary game data to
+        return null;
+    }
+
     @GetMapping("/test-get")
     public ResponseEntity<InitialResponseDTO> testGet() {
         InitialResponseDTO initialResponseDTO = new InitialResponseDTO(
                 ResponseType.YOUR_TURN,
+                12,
                 55,
                 Color.YELLOW,
                 List.of(new TileInfo(1, 10, TerrainType.HILL), new TileInfo(2, 20, TerrainType.FOREST))

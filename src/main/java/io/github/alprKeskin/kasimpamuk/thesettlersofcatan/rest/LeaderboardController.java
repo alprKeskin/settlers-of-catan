@@ -1,7 +1,7 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.rest;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication.CatanUser;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.LeaderboardService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.userdatabase.gamestatistics.LeaderboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
