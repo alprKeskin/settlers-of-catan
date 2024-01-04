@@ -16,7 +16,6 @@ import java.util.List;
 @ToString
 public class InitialResponseDTO {
 
-	private ResponseType responseType;
 	private int gameId;
 	private int playerId;
 	private Color playerColor;

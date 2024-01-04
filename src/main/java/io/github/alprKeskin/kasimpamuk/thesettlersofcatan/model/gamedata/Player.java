@@ -15,16 +15,18 @@ import java.util.List;
 @ToString
 public class Player {
 
-	private int id;
+	private int gameId;
+	private int playerId;
 	private int score = 0;
 	private Color color;
 	private List<Integer> settlementIds = new ArrayList<>();
 	private List<Integer> roadIds = new ArrayList<>();
 	private ResourceInfo resourceInfo = new ResourceInfo();
 
-	public Player(int id) {
-		this.id = id;
-		this.color = this.assignColor(id);
+	public Player(int gameId, int playerId) {
+		this.gameId = gameId;
+		this.playerId = playerId;
+		this.color = this.assignColor(playerId - 4 * gameId);
 	}
 
 	private Color assignColor(int id) {

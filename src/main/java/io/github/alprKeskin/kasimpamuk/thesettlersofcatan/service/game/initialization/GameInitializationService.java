@@ -1,29 +1,24 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game.initialization;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Game;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Player;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game.PlayerService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.GameState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class GameInitializationService {
 
 	private final TileMapInfoInitializationService tileMapInfoInitializationService;
-	private final PlayerService playerService;
 
 	@Autowired
-	public GameInitializationService(TileMapInfoInitializationService tileMapInfoInitializationService, PlayerService playerService) {
+	public GameInitializationService(TileMapInfoInitializationService tileMapInfoInitializationService) {
 		this.tileMapInfoInitializationService = tileMapInfoInitializationService;
-		this.playerService = playerService;
 	}
 
 	public Game createNewGame(int id) {
-		return new Game(id, null, tileMapInfoInitializationService.createTileInfos());
-	}
-
-	public Player createNewPlayer(int playerId, int gameId) {
-		return this.playerService.createNewPlayer(playerId, gameId);
+		return new Game(id, GameState.WAITING_FOR_PLAYERS, new ArrayList<>(), tileMapInfoInitializationService.createTileInfos());
 	}
 
 }
