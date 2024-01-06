@@ -7,10 +7,7 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.TileInf
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.request.RequestDTO;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.InitialResponseDTO;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.ResponseDTO;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.Color;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.GameState;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.ResponseType;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.TerrainType;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.*;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game.GameManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +48,20 @@ public class CatanController {
                 this.gameManagerService.getGame(addedPlayer.getGameId()).getTileInfos()
         );
         return ResponseEntity.ok(initialResponseDTO);
+    }
 
+    @PostMapping("/get-game-data")
+    public ResponseEntity<ResponseDTO> getGameData(@RequestBody RequestDTO requestDTO) {
+        RequestType requestType = requestDTO.getRequestType();
+        int gameId = requestDTO.getGameId();
+        int playerId = requestDTO.getPlayerActionInfo().getPlayerId();
+        if (requestType == RequestType.GET_INFO) {
+            return ResponseEntity.ok(this.gameManagerService.getGameInfoForPlayer(gameId, playerId));
+        }
+        else if (requestType == RequestType.TURN_ROUND) {
+            return ResponseEntity.ok(this.gameManagerService.turnRound(requestDTO));
+        }
+        return null; // TODO: code...
     }
 
     @GetMapping("/test-get")

@@ -10,7 +10,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ResourceInfo {
-	private int brickAmount = 0;
-	private int grainAmount = 0;
-	// TODO: Add more
+	private int brickAmount = 3;
+	private int grainAmount = 1;
+	private int lumberAmount = 3;
+	private int oreAmount = 0;
+	private int woolAmount = 1;
 }

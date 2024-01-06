@@ -7,6 +7,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
@@ -40,12 +42,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
-            System.out.println("token : "+accessToken);
+            log.debug("token : "+ accessToken);
             Claims claims = jwtUtil.resolveClaims(request);
 
             if(claims != null & jwtUtil.validateClaims(claims)){
                 String email = claims.getSubject();
-                System.out.println("email : "+email);
                 Authentication authentication =
                         new UsernamePasswordAuthenticationToken(email,"",new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(authentication);

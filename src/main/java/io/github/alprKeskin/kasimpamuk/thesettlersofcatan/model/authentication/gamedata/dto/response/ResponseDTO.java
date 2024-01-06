@@ -1,22 +1,19 @@
-package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.request;
+package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.authentication.gamedata.dto.response;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.PlayerActionInfo;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.RequestType;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.ResponseType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class RequestDTO {
+public class ResponseDTO {
 
-	private RequestType requestType;
-	private int gameId;
+	private ResponseType responseType;
 	private PlayerActionInfo playerActionInfo;
 
 }

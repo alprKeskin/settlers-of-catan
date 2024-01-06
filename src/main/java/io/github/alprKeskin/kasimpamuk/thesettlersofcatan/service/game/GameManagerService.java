@@ -2,8 +2,13 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game;
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Game;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Player;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.PlayerActionInfo;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.request.RequestDTO;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.ResponseDTO;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.GameState;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.ResponseType;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game.initialization.GameInitializationService;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game.initialization.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +23,13 @@ public class GameManagerService {
 	private final GameInitializationService gameInitializationService;
 	private final PlayerService playerService;
 
+	private final GameService gameService;
+
 	@Autowired
-	public GameManagerService(GameInitializationService gameInitializationService, PlayerService playerService) {
+	public GameManagerService(GameInitializationService gameInitializationService, PlayerService playerService, GameService gameService) {
 		this.gameInitializationService = gameInitializationService;
 		this.playerService = playerService;
+		this.gameService = gameService;
 		this.games = new ArrayList<>();
 	}
 
@@ -30,38 +38,19 @@ public class GameManagerService {
 	}
 
 	public Player addNewPlayer() {
-		Player newPlayer;
-		int availableGameId = findAGameHavingSlot();
-
-		// if no empty game exists
-		if (availableGameId == -1) {
-			Game newGame = this.gameInitializationService.createNewGame(getNextGameId());
-			newPlayer = this.playerService.createNewPlayer(newGame.getGameId(), 0);
-			newGame.addPlayer(newPlayer);
-			this.games.add(newGame);
-		}
-		// if there is an empty game
-		else {
-			int emptySlotIndexOfGame = findEmptySlotIndexOfGame(availableGameId);
-			newPlayer = this.playerService.createNewPlayer(availableGameId, emptySlotIndexOfGame);
-			this.games.get(availableGameId).addPlayer(newPlayer);
-		}
-		return newPlayer;
+		return this.gameInitializationService.addNewPlayer(this.games);
 	}
 
-	private int getNextGameId() {
-		return this.games.size();
+	public ResponseDTO getGameInfoForPlayer(int gameId, int playerId) {
+		return this.gameService.getGameInfoForPlayer(this.games.get(gameId), playerId);
 	}
 
-	private int findAGameHavingSlot() {
-		for (Game game : this.games) {
-			if (game.getGameState() == GameState.WAITING_FOR_PLAYERS) return game.getGameId();
+	public ResponseDTO turnRound(RequestDTO requestDTO) {
+		Game game = this.games.get(requestDTO.getGameId());
+		if (game.getPlayerIdHavingTurn() != requestDTO.getPlayerActionInfo().getPlayerId()) {
+			throw new RuntimeException("Some player who has not the turn send a turn round request");
 		}
-		return -1;
-	}
-
-	private int findEmptySlotIndexOfGame(int gameId) {
-		return this.games.get(gameId).getPlayers().size();
+		return this.gameService.turnRoundForGame(game, requestDTO.getPlayerActionInfo());
 	}
 
 }
