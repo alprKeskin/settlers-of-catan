@@ -1,6 +1,5 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.rest;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Game;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Player;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.PlayerActionInfo;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.TileInfo;
@@ -8,7 +7,6 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.req
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.InitialResponseDTO;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.ResponseDTO;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.Color;
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.GameState;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.ResponseType;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.TerrainType;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game.GameManagerService;
