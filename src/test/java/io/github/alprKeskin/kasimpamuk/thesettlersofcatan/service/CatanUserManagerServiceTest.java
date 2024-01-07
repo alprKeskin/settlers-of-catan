@@ -35,7 +35,7 @@ class CatanUserManagerServiceTest {
     @Test
     void givenUserWithUniqueEmail_whenAddUser_thenReturnTrue() {
         List<CatanUser> catanUserList = createCorrectUserList();
-        CatanUser catanUser = new CatanUser(147L, "unique_email@outlook.com", "1234", 50, 60, 70);
+        CatanUser catanUser = new CatanUser(147, "unique_email@outlook.com", "1234", 50, 60, 70);
 
         // set behavior of the databaseService.addUser method
         mockDatabaseServiceAddUser(catanUser, catanUserList);
@@ -48,7 +48,7 @@ class CatanUserManagerServiceTest {
     @Test
     void givenUserWithExistingEmailInDatabase_whenAddUser_thenReturnFalse() {
         List<CatanUser> catanUserList = createCorrectUserList();
-        CatanUser catanUser = new CatanUser(149L, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000);
+        CatanUser catanUser = new CatanUser(149, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000);
 
         // set behavior of the databaseService.addUser method
         mockDatabaseServiceAddUser(catanUser, catanUserList);
@@ -102,7 +102,7 @@ class CatanUserManagerServiceTest {
     @Test
     void givenExistingUser_whenDeleteUser_thenReturnTrue() {
         List<CatanUser> catanUserList = createCorrectUserList();
-        CatanUser catanUser = new CatanUser(150L, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000);
+        CatanUser catanUser = new CatanUser(150, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000);
 
         mockDatabaseServiceDeleteUser(catanUser.getEmail(), catanUserList);
 
@@ -114,7 +114,7 @@ class CatanUserManagerServiceTest {
     @Test
     void givenNotExistingUser_whenDeleteUser_thenReturnFalse() {
         List<CatanUser> catanUserList = createCorrectUserList();
-        CatanUser catanUser = new CatanUser(151L, "unique_email@outlook.com", "1234", 1000, 1000, 1000);
+        CatanUser catanUser = new CatanUser(151, "unique_email@outlook.com", "1234", 1000, 1000, 1000);
 
         mockDatabaseServiceDeleteUser(catanUser.getEmail(), catanUserList);
 
@@ -127,12 +127,12 @@ class CatanUserManagerServiceTest {
     private List<CatanUser> createCorrectUserList() {
         List<CatanUser> catanUserList = new ArrayList<>();
 
-        catanUserList.add(new CatanUser(3L, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
-        catanUserList.add(new CatanUser(1L, "alper_keskin@outlook.com", "123", 30, 20, 50));
-        catanUserList.add(new CatanUser(2L, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
-        catanUserList.add(new CatanUser(4L, "johny_bravo@outlook.com", "123", 8, 5, 3));
-        catanUserList.add(new CatanUser(5L, "sinan_engin@outlook.com", "123", 0, 0, 0));
-        catanUserList.add(new CatanUser(6L, "elon_musk@outlook.com", "X", 999, 999, 999));
+        catanUserList.add(new CatanUser(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
+        catanUserList.add(new CatanUser(1, "alper_keskin@outlook.com", "123", 30, 20, 50));
+        catanUserList.add(new CatanUser(2, "kasim_pamuk@outlook.com", "123", 100, 10, 20));
+        catanUserList.add(new CatanUser(4, "johny_bravo@outlook.com", "123", 8, 5, 3));
+        catanUserList.add(new CatanUser(5, "sinan_engin@outlook.com", "123", 0, 0, 0));
+        catanUserList.add(new CatanUser(6, "elon_musk@outlook.com", "X", 999, 999, 999));
 
         return catanUserList;
     }
@@ -140,8 +140,8 @@ class CatanUserManagerServiceTest {
     private List<CatanUser> createErrorUserListDueToDuplicatedId() {
         List<CatanUser> catanUserList = new ArrayList<>();
 
-        catanUserList.add(new CatanUser(3L, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
-        catanUserList.add(new CatanUser(3L, "alper_keskin@outlook.com", "123", 30, 20, 50));
+        catanUserList.add(new CatanUser(3, "hande_hoca@outlook.com", "1234", 1000, 1000, 1000));
+        catanUserList.add(new CatanUser(3, "alper_keskin@outlook.com", "123", 30, 20, 50));
 
         return catanUserList;
     }
@@ -154,7 +154,7 @@ class CatanUserManagerServiceTest {
 
         // find the indexes of users having duplicated id
         for (int i = 1; i < catanUserList.size(); i++) {
-            Long currentUserId = catanUserList.get(i).getId();
+            Integer currentUserId = catanUserList.get(i).getId();
             for (int j = i - 1; j < i; j++) {
                 // if it is duplicated
                 if (Objects.equals(currentUserId, catanUserList.get(j).getId())) {
