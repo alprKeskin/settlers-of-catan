@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -19,6 +18,15 @@ public class Game {
 	private List<Player> players = new ArrayList<>();
 	private List<TileInfo> tileInfos = new ArrayList<>();
 	private PlayerActionInfo lastAction = new PlayerActionInfo();
+
+	public Game(int gameId, GameState gameState, int playerIdHavingTurn, List<Player> players, List<TileInfo> tileInfos, PlayerActionInfo lastAction) {
+		this.gameId = gameId;
+		this.gameState = gameState;
+		this.playerIdHavingTurn = 4 * gameId;
+		this.players = players;
+		this.tileInfos = tileInfos;
+		this.lastAction = lastAction;
+	}
 
 	public void addPlayer(Player player) {
 		if (this.players.size() >= 4) throw new RuntimeException("Attempt to add a player to a full game.");
