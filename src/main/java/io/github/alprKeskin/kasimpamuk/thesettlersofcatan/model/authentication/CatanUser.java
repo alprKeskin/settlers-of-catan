@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -12,8 +12,8 @@ import lombok.*;
 public class CatanUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String email;
     private String password;
     private Integer highestWeekScore;

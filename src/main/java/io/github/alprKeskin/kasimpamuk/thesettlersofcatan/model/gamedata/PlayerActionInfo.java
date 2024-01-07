@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class PlayerActionInfo {
-	private int playerId;
+	private int playerId = -1;
 	private Color playerColor;
 	private int dice1;
 	private int dice2;

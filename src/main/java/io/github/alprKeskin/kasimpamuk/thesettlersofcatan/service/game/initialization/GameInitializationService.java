@@ -2,6 +2,7 @@ package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game.initiali
 
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Game;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Player;
+import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.PlayerActionInfo;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.GameState;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class GameInitializationService {
 	}
 
 	private Game createNewGame(int id) {
-		return new Game(id, GameState.WAITING_FOR_PLAYERS, 0, new ArrayList<>(), tileMapInfoInitializationService.createTileInfos(), null);
+		return new Game(id, GameState.WAITING_FOR_PLAYERS, 0, new ArrayList<>(), tileMapInfoInitializationService.createTileInfos(), new PlayerActionInfo());
 	}
 
 	private int findAGameHavingSlot(final List<Game> games) {

@@ -1,6 +1,6 @@
 package io.github.alprKeskin.kasimpamuk.thesettlersofcatan.rest;
 
-import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Game;
+import com.google.gson.Gson;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.Player;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.PlayerActionInfo;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.TileInfo;
@@ -9,6 +9,7 @@ import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.res
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.dto.response.ResponseDTO;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.model.gamedata.enumeration.*;
 import io.github.alprKeskin.kasimpamuk.thesettlersofcatan.service.game.GameManagerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/catan")
 @CrossOrigin
+@Slf4j
 public class CatanController {
 
     private final GameManagerService gameManagerService;
+
+    private final Gson gson = new Gson();
 
     @Autowired
     public CatanController(GameManagerService gameManagerService) {
@@ -39,6 +43,7 @@ public class CatanController {
 
     @GetMapping("/initial-game-data")
     public ResponseEntity<InitialResponseDTO> initialGameData() {
+        log.info("Incoming initial game data request...");
         Player addedPlayer = this.gameManagerService.addNewPlayer();
 
         InitialResponseDTO initialResponseDTO = new InitialResponseDTO(
@@ -51,7 +56,9 @@ public class CatanController {
     }
 
     @PostMapping("/get-game-data")
-    public ResponseEntity<ResponseDTO> getGameData(@RequestBody RequestDTO requestDTO) {
+    public ResponseEntity<ResponseDTO> getGameData(@RequestBody String jsonRequestDTO) {
+        log.info("Incoming RequestDTO: " + jsonRequestDTO);
+        RequestDTO requestDTO = gson.fromJson(jsonRequestDTO, RequestDTO.class);
         RequestType requestType = requestDTO.getRequestType();
         int gameId = requestDTO.getGameId();
         int playerId = requestDTO.getPlayerActionInfo().getPlayerId();
@@ -59,9 +66,13 @@ public class CatanController {
             return ResponseEntity.ok(this.gameManagerService.getGameInfoForPlayer(gameId, playerId));
         }
         else if (requestType == RequestType.TURN_ROUND) {
-            return ResponseEntity.ok(this.gameManagerService.turnRound(requestDTO));
+            ResponseDTO responseDTO = this.gameManagerService.turnRound(requestDTO);
+            log.info("Outgoing ResponseDTO: " + responseDTO);
+            return ResponseEntity.ok(responseDTO);
         }
-        return null; // TODO: code...
+        else {
+            return null;
+        }
     }
 
     @GetMapping("/test-get")
@@ -77,8 +88,8 @@ public class CatanController {
     }
 
     @PostMapping("/test-post")
-    public ResponseEntity<ResponseDTO> testPost(@RequestBody RequestDTO requestDTO) {
-        System.out.println("Incoming RequestDTO: " + requestDTO.toString());
+    public ResponseEntity<ResponseDTO> testPost(@RequestBody String requestDTO) {
+        System.out.println("Incoming RequestDTO: " + requestDTO);
 
         ResponseDTO responseDTO = new ResponseDTO(
                 ResponseType.WAIT,

@@ -18,7 +18,7 @@ public class Game {
 	private int playerIdHavingTurn = 0;
 	private List<Player> players = new ArrayList<>();
 	private List<TileInfo> tileInfos = new ArrayList<>();
-	private PlayerActionInfo lastAction = null;
+	private PlayerActionInfo lastAction = new PlayerActionInfo();
 
 	public void addPlayer(Player player) {
 		if (this.players.size() >= 4) throw new RuntimeException("Attempt to add a player to a full game.");

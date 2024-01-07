@@ -47,6 +47,8 @@ public class GameManagerService {
 
 	public ResponseDTO turnRound(RequestDTO requestDTO) {
 		Game game = this.games.get(requestDTO.getGameId());
+		System.out.println("game.getPlayerIdHavingTurn(): " + game.getPlayerIdHavingTurn());
+		System.out.println("requestDTO.getPlayerActionInfo().getPlayerId(): " + requestDTO.getPlayerActionInfo().getPlayerId());
 		if (game.getPlayerIdHavingTurn() != requestDTO.getPlayerActionInfo().getPlayerId()) {
 			throw new RuntimeException("Some player who has not the turn send a turn round request");
 		}

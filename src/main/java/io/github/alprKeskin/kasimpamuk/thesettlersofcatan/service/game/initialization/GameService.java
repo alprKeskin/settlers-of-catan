@@ -50,7 +50,7 @@ public class GameService {
 	public ResponseDTO turnRoundForGame(Game game, PlayerActionInfo playerActionInfo) {
 		ResponseDTO responseDTO;
 		throwExceptionIfGameHasNotStarted(game.getGameState());
-		game.setLastAction(playerActionInfo);
+		if (playerActionInfo != null) game.setLastAction(playerActionInfo);
 		game.giveRoundToNextPlayer();
 		responseDTO = new ResponseDTO(ResponseType.WAIT, game.getLastAction());
 		return responseDTO;
