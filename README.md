@@ -1,3 +1,3 @@
-# The Settlers of Catan Game Backend
+# The Settlers of Catan Game
 
-The backend service of the game is written using Java Spring.
+The desktop implementation of the famous game named settlers of catan written using Java Spring (Backend) and JavaFx (Frontend).
